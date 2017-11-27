@@ -2,6 +2,7 @@ package com.example.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Entity
@@ -11,6 +12,8 @@ public class Employee {
     private Long id;
     private String fullName;
     private LocalDate birthday;
+    @OneToOne
+    private Department department;
 
     public Employee() {
 
@@ -31,5 +34,13 @@ public class Employee {
 
     public LocalDate getBirthday() {
         return birthday;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
