@@ -16,11 +16,10 @@ public class Employee {
     private Department department;
 
     public Employee() {
-
     }
 
-    public Employee(String fio, LocalDate birthday) {
-        this.fullName = fio;
+    public Employee(String fullName, LocalDate birthday) {
+        this.fullName = fullName;
         this.birthday = birthday;
     }
 
