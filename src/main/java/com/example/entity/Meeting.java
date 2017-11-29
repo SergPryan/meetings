@@ -1,24 +1,23 @@
 package com.example.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 public class Meeting {
 
     @Id
+    @GeneratedValue
     private Long id;
     private LocalDateTime dateTime;
     private String topic;
     @OneToOne
     private Employee responsible;
     @OneToMany
-    private Collection<Employee> listOfParticipants;
+    private Collection<Employee> listOfParticipants = new HashSet<>();
 
     public Meeting() {
     }
