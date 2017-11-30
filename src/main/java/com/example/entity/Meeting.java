@@ -14,8 +14,13 @@ public class Meeting {
     private Long id;
     private LocalDateTime dateTime;
     private String topic;
+
+    @OneToOne
+    private Department department;
+
     @OneToOne
     private Employee responsible;
+
     @OneToMany
     private Collection<Employee> listOfParticipants = new HashSet<>();
 
@@ -61,5 +66,13 @@ public class Meeting {
 
     public void setListOfParticipants(Collection<Employee> listOfParticipants) {
         this.listOfParticipants = listOfParticipants;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

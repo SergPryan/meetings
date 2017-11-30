@@ -17,4 +17,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public Collection<Employee> getAll(Long departmentId){
+        return employeeRepository.findAllByDepartment_Id(departmentId);
+    }
 }

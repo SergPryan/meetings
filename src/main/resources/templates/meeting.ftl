@@ -30,7 +30,7 @@
       <tr>
           <td>${list.fullName}</td>
           <td>${currentYear - list.getBirthday().getYear()}</td>
-          <td>${list.department.name}</td>
+          <td></td>
           <td></td>
       </tr>
   </#list>

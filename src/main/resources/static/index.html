@@ -7,21 +7,25 @@
 <body ng-app="app" ng-controller="appCtrl">
 
         <h3>Фильтры</h3><br>
-        <h4>Тема</h4><input type="text">
-        <h4>С какого числа</h4><input type="date">
-        <h4>По какое число</h4><input type="date">
+        <h4>Тема</h4><input type="text" ng-model="filterMeeting.topic">
+        <h4>С какого числа</h4><input type="date" ng-model="filterMeeting.dateFrom">
+        <h4>По какое число</h4><input type="date" ng-model="filterMeeting.dateTo">
         <h4>Подразделение</h4>
-        <select>
-            <option>раз</option>
-            <option>два</option>
+        <select ng-model="filterMeeting.departmentId" ng-change="getEmployeesByDepartmentId()">
+            <option ng-repeat="iterator in departments" value="{{iterator.id}}"  > {{iterator.name}}</option>
         </select>
         <h4>Сотрудник</h4>
-        <select>
-            <option>раз</option>
-            <option>два</option>
-        </select>
-        <button>Применить фильтры</button>
+        <select ng-model="filterMeeting.employeeId">
+            <option ng-repeat="iterator in employees" value="{{iterator.id}}"> {{iterator.fullName}}</option>
+        </select><br>
+        <button ng-click="applyFilter()">Применить фильтры</button>
     </div>
+
+        {{filterMeeting.topic}}
+        {{filterMeeting.dateFrom}}
+        {{filterMeeting.dateTo}}
+        {{filterMeeting.departmentId}}
+        {{filterMeeting.employeeId}}
 
     <table>
         <tr>

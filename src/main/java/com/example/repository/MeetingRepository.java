@@ -3,5 +3,10 @@ package com.example.repository;
 import com.example.entity.Meeting;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MeetingRepository extends JpaRepository<Meeting, Long> {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+public interface MeetingRepository extends JpaRepository<Meeting, Long>, CustomizedMeetingRepository {
+    List<Meeting> findAllByTopicLikeAndDateTimeGreaterThanAndDateTimeLessThan (String topic, LocalDateTime dateFrom,LocalDateTime dateTo);
 }
