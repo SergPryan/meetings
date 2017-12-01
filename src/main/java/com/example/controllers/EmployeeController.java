@@ -22,7 +22,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/all")
-    public ResponseEntity<Collection<EmployeeDto>> getAll(@RequestParam Long departmentId){
+    public ResponseEntity<Collection<EmployeeDto>> getAll(@RequestParam(required = false,name = "departmentId") Long departmentId){
         Collection<EmployeeDto> result;
         if(departmentId != null)
         {

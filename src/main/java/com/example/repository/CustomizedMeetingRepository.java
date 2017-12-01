@@ -6,6 +6,5 @@ import java.util.Collection;
 import java.util.List;
 
 public interface CustomizedMeetingRepository {
-    List<Meeting> adasdadsad();
-    Collection<Meeting> filterMeeting(String topic, String dateFrom, String dateTo, Long departmentId, Long responsible_id);
+    Collection<Meeting> filterMeeting(String topic, String dateFrom, String dateTo, String departmentId, String responsible_id);
 }

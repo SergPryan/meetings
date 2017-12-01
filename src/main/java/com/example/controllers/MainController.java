@@ -17,35 +17,35 @@ import java.time.LocalDateTime;
 public class MainController {
 
 
-    @Autowired
-    MeetingRepository meetingRepository;
-
-    @Autowired
-    EmployeeRepository employeeRepository;
-
-    @Autowired
-    DepartmentRepository departmentRepository;
-
-    @GetMapping("/test")
-    public void get(){
-        Meeting meeting = new Meeting(LocalDateTime.now(),"topic meeting");
-        Employee employee1 = new Employee("serge p", LocalDate.now());
-        Employee employee2 = new Employee("mihail p", LocalDate.now());
-        Employee employee3 = new Employee("petr p", LocalDate.now());
-        Department department1 = new Department("depart 1");
-        Department department2 = new Department("depart 2");
-        departmentRepository.save(department1);
-        departmentRepository.save(department2);
-        meetingRepository.save(meeting);
-        employeeRepository.save(employee1);
-        employeeRepository.save(employee2);
-        employeeRepository.save(employee3);
-        meeting.setResponsible(employee1);
-        meeting.getListOfParticipants().add(employee2);
-        meeting.getListOfParticipants().add(employee3);
-        meeting.setDepartment(department1);
-        meetingRepository.save(meeting);
-
-    }
+//    @Autowired
+//    MeetingRepository meetingRepository;
+//
+//    @Autowired
+//    EmployeeRepository employeeRepository;
+//
+//    @Autowired
+//    DepartmentRepository departmentRepository;
+//
+//    @GetMapping("/test")
+//    public void get(){
+//        Meeting meeting = new Meeting(LocalDateTime.now(),"topic meeting");
+//        Employee employee1 = new Employee("serge p", LocalDate.now());
+//        Employee employee2 = new Employee("mihail p", LocalDate.now());
+//        Employee employee3 = new Employee("petr p", LocalDate.now());
+//        Department department1 = new Department("depart 1");
+//        Department department2 = new Department("depart 2");
+//        departmentRepository.save(department1);
+//        departmentRepository.save(department2);
+//        meetingRepository.save(meeting);
+//        employeeRepository.save(employee1);
+//        employeeRepository.save(employee2);
+//        employeeRepository.save(employee3);
+//        meeting.setResponsible(employee1);
+//        meeting.getListOfParticipants().add(employee2);
+//        meeting.getListOfParticipants().add(employee3);
+//        meeting.setDepartment(department1);
+//        meetingRepository.save(meeting);
+//
+//    }
 
 }

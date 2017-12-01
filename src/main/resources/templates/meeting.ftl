@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<form method="post" action="/meeting/save" enctype="text/plain">
+
 <h1>Тема</h1><input type="text" value="${meeting.topic}"><br>
 <h1>Время проведения</h1><input type="date"><br>
 <h1>Подразделение</h1><select>
@@ -41,5 +43,8 @@
 </#list>
 </select>
 <button>Добавить</button>
+
+    <button type="submit" value="Submit">Submit</button>
+</form>
 </body>
 </html>
