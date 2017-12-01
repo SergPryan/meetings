@@ -15,16 +15,27 @@ app.controller('appCtrl',function ($scope,$http,$filter) {
     })
     $scope.applyFilter = function () {
         console.log('apply filter')
-        var dateFrom = $filter('date')($scope.filterMeeting.dateFrom, "yyyy-MM-dd");
-        var dateTo = $filter('date')($scope.filterMeeting.dateTo, "yyyy-MM-dd");
-        // var dateTo = $filter('date')($scope.filterMeeting.dateTo, "dd/MM/yyyy");
-        $http.get('/meeting/all?'+
-        'topic='+$scope.filterMeeting.topic+'&'+
-        'dateFrom='+dateFrom+'&'+
-        'dateTo='+dateTo+'&'+
-        'departmentId='+$scope.filterMeeting.departmentId+'&'+
-        'employeeId='+$scope.filterMeeting.employeeId+'&'
-        ).then(function (response) {
+        var request = '/meeting/all?'
+        if ($scope.filterMeeting.topic !== undefined){
+            request+='topic='+$scope.filterMeeting.topic+'&'
+        }
+        if ($scope.filterMeeting.dateFrom !== undefined){
+            var dateFrom = $filter('date')($scope.filterMeeting.dateFrom, "yyyy-MM-dd")
+            request+='dateFrom='+dateFrom+'&'
+        }
+        if ($scope.filterMeeting.dateTo !== undefined){
+            var dateTo = $filter('date')($scope.filterMeeting.dateTo, "yyyy-MM-dd");
+            request+='dateTo='+dateTo+'&'
+        }
+        if ($scope.filterMeeting.departmentId !== undefined){
+            request+='departmentId='+$scope.filterMeeting.departmentId+'&'
+        }
+        if ($scope.filterMeeting.employeeId !== undefined){
+            request+='employeeId='+$scope.filterMeeting.employeeId+'&'
+        }
+        console.log(request)
+
+        $http.get(request).then(function (response) {
             $scope.meetings = response.data
             console.log(response.data)
         })

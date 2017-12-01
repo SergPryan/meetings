@@ -58,27 +58,26 @@ public class MeetingController {
                                                          @RequestParam(required = false,name = "dateTo") String dateTo,
                                                          @RequestParam(required = false,name = "departmentId") Long departmentId,
                                                          @RequestParam(required = false,name = "employeeId") Long employeeId){
-        String[] arrDateTo = dateTo.split("-");
-        LocalDateTime timeDateTo = LocalDateTime.of(Integer.valueOf(arrDateTo[0]),Integer.valueOf(arrDateTo[1]),Integer.valueOf(arrDateTo[2]),23,59);
-        System.out.println(timeDateTo.format(DateTimeFormatter.ISO_DATE_TIME));
+//        String[] arrDateTo = dateTo.split("-");
+//        LocalDateTime timeDateTo = LocalDateTime.of(Integer.valueOf(arrDateTo[0]),Integer.valueOf(arrDateTo[1]),Integer.valueOf(arrDateTo[2]),23,59);
+//        System.out.println(timeDateTo.format(DateTimeFormatter.ISO_DATE_TIME));
+//
+//        String[] arrDateFrom = dateFrom.split("-");
+//        LocalDateTime timeDateFrom = LocalDateTime.of(Integer.valueOf(arrDateFrom[0]),Integer.valueOf(arrDateFrom[1]),Integer.valueOf(arrDateFrom[2]),0,0);
+//        System.out.println(timeDateFrom.format(DateTimeFormatter.ISO_DATE_TIME));
 
-        String[] arrDateFrom = dateFrom.split("-");
-        LocalDateTime timeDateFrom = LocalDateTime.of(Integer.valueOf(arrDateFrom[0]),Integer.valueOf(arrDateFrom[1]),Integer.valueOf(arrDateFrom[2]),0,0);
-        System.out.println(timeDateFrom.format(DateTimeFormatter.ISO_DATE_TIME));
-
-        meetingRepository.adasdadsad();
+//        meetingRepository.adasdadsad();
 
 
+        Collection<Meeting> tmp;
         if(topic != null || dateFrom != null || dateTo != null | departmentId != null | employeeId != null){
-
-
+            tmp = meetingRepository.filterMeeting(topic,dateFrom,dateTo,departmentId,employeeId);
+            return new ResponseEntity<>(tmp.stream().map(this::convertToDto).collect(Collectors.toList()), HttpStatus.OK);
         }
-
-
-        Collection<MeetingDto> result2 = meetingRepository.findAllByTopicLikeAndDateTimeGreaterThanAndDateTimeLessThan(topic,timeDateFrom,null).stream().map(this::convertToDto).collect(Collectors.toList());
+//        Collection<MeetingDto> result2 = meetingRepository.findAllByTopicLikeAndDateTimeGreaterThanAndDateTimeLessThan(topic,timeDateFrom,null).stream().map(this::convertToDto).collect(Collectors.toList());
 
         Collection<MeetingDto> result = meetingService.getAll().stream().map(this::convertToDto).collect(Collectors.toList());
-        return new ResponseEntity<>(result2, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     private MeetingDto convertToDto(Meeting meeting){

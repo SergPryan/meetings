@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 public class MeetingRepositoryImpl implements CustomizedMeetingRepository {
@@ -25,7 +26,14 @@ public class MeetingRepositoryImpl implements CustomizedMeetingRepository {
     }
 
 
-    public String filterMeeting(String topic, String dateFrom, String dateTo, Long departmentId, Long responsible_id){
+    public Collection<Meeting> filterMeeting(String topic, String dateFrom, String dateTo, Long departmentId, Long responsibleId){
+       String request = createRequestFilter(topic, dateFrom, dateTo, departmentId, responsibleId);
+       System.out.println(request);
+        Query query = entityManager.createNativeQuery(request,Meeting.class);
+        return query.getResultList();
+    }
+
+    private String createRequestFilter(String topic, String dateFrom, String dateTo, Long departmentId, Long responsibleId){
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT * FROM meeting WHERE");
         if(topic != null){
@@ -34,26 +42,25 @@ public class MeetingRepositoryImpl implements CustomizedMeetingRepository {
             sb.append("%'");
         }
         if(dateFrom != null){
-           sb.append(" AND date_time > ");
-           sb.append("'");
-           sb.append(dateFrom);
-           sb.append("'");
+            sb.append(" AND date_time >= ");
+            sb.append("'");
+            sb.append(dateFrom);
+            sb.append("'");
         }
         if(dateTo != null){
-            sb.append(" AND date_time < ");
+            sb.append(" AND date_time <= ");
             sb.append("'");
             sb.append(dateTo);
             sb.append("'");
         }
         if(departmentId != null){
-            sb.append(" AND deparment_id  = ");
+            sb.append(" AND department_id  = ");
             sb.append(departmentId);
         }
-        if(responsible_id != null){
+        if(responsibleId != null){
             sb.append(" AND responsible_id  = ");
             sb.append(departmentId);
         }
         return sb.toString();
-
     }
 }
