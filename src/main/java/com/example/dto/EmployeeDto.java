@@ -1,10 +1,14 @@
 package com.example.dto;
 
+import com.example.entity.Department;
+
 public class EmployeeDto {
     private Long id;
     private String fullName;
-    private Long departmentId;
+    private Department department;
     private int age;
+
+    public EmployeeDto(){}
 
     public int getAge() {
         return age;
@@ -30,11 +34,11 @@ public class EmployeeDto {
         this.fullName = fullName;
     }
 
-    public Long getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

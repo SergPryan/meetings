@@ -1,6 +1,6 @@
-<h3>Тема</h3><input type="text" value="{{meeting.topic}}"><br>
+<h3>Тема</h3><input type="text" ng-model="meeting.topic"><br>
 
-<h3>Время проведения</h3><input type="date"><br>
+<h3>Время проведения</h3><input ng-model="meeting.date" type="date"><br>
 
 <h3>Подразделение</h3><select ng-model="defaultDepartment">
     <option ng-repeat="department in departments" value="{{department.id}}"
@@ -24,7 +24,7 @@
     </tr>
     <tr ng-repeat="employee in meeting.listOfParticipants track by $index">
         <td>{{employee.fullName}}</td>
-        <td>{{employee.birthday.year}}</td>
+        <td>{{employee.age}}</td>
         <td>{{employee.department.name}}</td>
         <td>
             <button ng-click="deleteEmployee($index)">Delete</button>
@@ -42,7 +42,7 @@
 <button ng-click="addParticipant()">Добавить</button> <br><br>
 
 {{newParticipant}}<br>
-{{meeting.listOfParticipants }}
+{{meeting.listOfParticipants }}<br>
 
-<button>Сохранить</button>
-<button>Не сохранять</button>
+<button ng-click="saveMeeting()">Сохранить</button>
+<button ng-click="cancelSaveMeeting()">Не сохранять</button>

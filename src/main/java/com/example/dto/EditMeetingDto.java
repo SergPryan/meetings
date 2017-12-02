@@ -2,12 +2,23 @@ package com.example.dto;
 
 import com.example.entity.Department;
 
+import java.util.List;
+
 public class EditMeetingDto {
     private Long id;
     private String date;
     private String topic;
     private Department department;
     private EmployeeDto responsible;
+    private List<EmployeeDto> listOfParticipants;
+
+    public List<EmployeeDto> getListOfParticipants() {
+        return listOfParticipants;
+    }
+
+    public void setListOfParticipants(List<EmployeeDto> listOfParticipants) {
+        this.listOfParticipants = listOfParticipants;
+    }
 
     public String getDate() {
         return date;

@@ -11,11 +11,19 @@ import java.util.Collection;
 public class DepartmentService {
 
 
+    private final DepartmentRepository departmentRepository;
+
     @Autowired
-    private DepartmentRepository departmentRepository;
+    public DepartmentService(DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
+    }
 
     public Collection<Department> getAll(){
         return departmentRepository.findAll();
+    }
+
+    public Department findById(Long id){
+        return departmentRepository.findOne(id);
     }
 
 }

@@ -10,8 +10,12 @@ import java.util.Collection;
 @Service
 public class EmployeeService {
 
+    private final EmployeeRepository employeeRepository;
+
     @Autowired
-    private EmployeeRepository employeeRepository;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     public Collection<Employee> getAll(){
         return employeeRepository.findAll();
@@ -19,5 +23,9 @@ public class EmployeeService {
 
     public Collection<Employee> getAll(Long departmentId){
         return employeeRepository.findAllByDepartment_Id(departmentId);
+    }
+
+    public Employee findById(Long id){
+        return employeeRepository.findOne(id);
     }
 }

@@ -11,8 +11,12 @@ import java.util.List;
 
 public class MeetingRepositoryImpl implements CustomizedMeetingRepository {
 
+    private final EntityManager entityManager;
+
     @Autowired
-    private EntityManager entityManager;
+    public MeetingRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public Collection<Meeting> filterMeeting(String topic, String dateFrom, String dateTo, String departmentId, String responsibleId){
        String request = createRequestFilter(topic, dateFrom, dateTo, departmentId, responsibleId);
@@ -40,7 +44,6 @@ public class MeetingRepositoryImpl implements CustomizedMeetingRepository {
                 arguments.add("responsible_id  = "+responsibleId);
             }
         }
-
         if(arguments.size() != 0){
             sb.append(" WHERE ");
             sb.append(String.join(" AND ",arguments));

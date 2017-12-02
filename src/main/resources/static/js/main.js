@@ -2,9 +2,6 @@ app = angular.module('meetingApp',['ngRoute'])
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-        // .when('/meeting', {
-        //     templateUrl: 'meeting.html',
-        // })
         .when('/edit_meeting:id', {
             templateUrl: 'meeting.html',
             controller: 'meetingCtrl'
@@ -13,7 +10,7 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'list_meetings.html',
             controller: 'appCtrl'
         })
-        // .otherwise({redirectTo:'/items/computers'});
+        .otherwise({redirectTo:'/'});
 }]);
 
 app.controller('appCtrl',function ($scope,$http,$filter) {
@@ -60,7 +57,7 @@ app.controller('appCtrl',function ($scope,$http,$filter) {
     }
 });
 
-app.controller('meetingCtrl',function ($scope, $routeParams, $http,$filter) {
+app.controller('meetingCtrl',function ($scope, $routeParams, $http) {
     $http.get('/meeting/'+$routeParams.id).then(function (response) {
         $scope.meeting = response.data
 
@@ -80,6 +77,12 @@ app.controller('meetingCtrl',function ($scope, $routeParams, $http,$filter) {
     }
     $scope.addParticipant = function () {
         $scope.meeting.listOfParticipants.push($scope.newParticipant)
+    }
+    $scope.saveMeeting = function () {
+        $http.post('/meeting/save',$scope.meeting)
+    }
+    $scope.cancelSaveMeeting = function () {
+
     }
 
 })

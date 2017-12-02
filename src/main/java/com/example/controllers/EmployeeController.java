@@ -19,8 +19,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/employee")
 public class EmployeeController {
 
+    private final EmployeeService employeeService;
+
     @Autowired
-    private EmployeeService employeeService;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping("/all")
     public ResponseEntity<Collection<EmployeeDto>> getAll(@RequestParam(required = false,name = "departmentId") Long departmentId){
@@ -34,14 +38,14 @@ public class EmployeeController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    private EmployeeDto convertToDto(Employee employee){
+    EmployeeDto convertToDto(Employee employee){
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setId(employee.getId());
         employeeDto.setFullName(employee.getFullName());
         employeeDto.setAge(LocalDate.now().getYear() - employee.getBirthday().getYear());
         if(employee.getDepartment() != null)
         {
-            employeeDto.setDepartmentId(employee.getDepartment().getId());
+            employeeDto.setDepartment(employee.getDepartment());
         }
         return employeeDto;
     }
