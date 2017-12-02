@@ -58,7 +58,7 @@ public class MeetingService {
         return meetingRepository.findAll();
     }
 
-    public Meeting getBiId(Long id){
-        return meetingRepository.findOne(1l);
+    public Meeting getById(Long id){
+        return meetingRepository.findOne(id);
     }
 }

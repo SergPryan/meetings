@@ -3,8 +3,16 @@ app = angular.module('meetingApp',['ngRoute'])
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-        .when('/meeting', {
-            template: '<h1>items/computers</h1>',
+        // .when('/meeting', {
+        //     templateUrl: 'meeting.html',
+        // })
+        .when('/edit_meeting:id', {
+            templateUrl: 'meeting.html',
+            controller: 'meetingCtrl'
+        })
+        .when('/list_meetings', {
+            templateUrl: 'list_meetings.html',
+            controller: 'appCtrl'
         })
 
         // .otherwise({redirectTo:'/items/computers'});
@@ -25,8 +33,6 @@ app.controller('appCtrl',function ($scope,$http,$filter) {
         var dateTo = $scope.dateTo
         var departmentId = $scope.departmentId
         var employeeId = $scope.employeeId
-
-        console.log(topic)
 
         if (topic !== undefined){
             request+='topic='+topic+'&'
@@ -56,3 +62,16 @@ app.controller('appCtrl',function ($scope,$http,$filter) {
         })
     }
 });
+
+app.controller('meetingCtrl',function ($scope, $routeParams, $http) {
+    $http.get('/meeting/'+$routeParams.id).then(function (response) {
+        $scope.meeting = response.data
+
+    })
+    $scope.getEmployeeByDepartmentId = function () {
+        $http.get('/employee/all' + '?departmentId=' + $scope.defaultDepartment).then(function (response) {
+            $scope.employees = response.data
+        })
+    }
+
+})

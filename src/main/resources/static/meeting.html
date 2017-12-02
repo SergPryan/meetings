@@ -1,22 +1,31 @@
+<h3>Тема</h3><input type="text" value="{{meeting.topic}}"><br>
 
-    <h3>Тема</h3><input type="text"><br>
+<h3>Время проведения</h3><input type="date"><br>
 
-    <h3>Время проведения</h3><input type="date"><br>
+<h3>Подразделение</h3><select ng-model="defaultDepartment">
+    <option ng-repeat="department in departments" value="{{department.id}}"
+            ng-selected="meeting.department.id == department.id">{{department.name}}
+    </option>
+</select><br>
 
-    <h3>Подразделение</h3><select></select><br>
+<h3>Ответственный</h3><select ng-click="getEmployeeByDepartmentId()">
+    <option ng-repeat="employee in employees" value="{{employee.id}}"
+            ng-selected="meeting.responsible.id == employee.id">{{employee.fullName}}
+    </option>
+</select><br>
 
-    <h3>Ответственный</h3><select></select><br>
+<h3>Состав участников</h3>
+<table>
+    <tr>
+        <th>Имя</th>
+        <th>Возраст</th>
+        <th>Подразделение</th>
+        <th>Delete</th>
+    </tr>
+</table>
 
-    <h3>Состав участников</h3>
-    <table>
-        <tr>
-            <th>Имя</th>
-            <th>Возраст</th>
-            <th>Подразделение</th>
-            <th>Delete</th>
-        </tr>
-    </table>
+<h3>Участник</h3><select></select>
+<button>Добавить</button> <br><br>
 
-    <h3>Участник</h3><select></select> <button>Добавить</button> <br><br>
-
-<button>Сохранить</button><button>Не сохранять</button>
+<button>Сохранить</button>
+<button>Не сохранять</button>

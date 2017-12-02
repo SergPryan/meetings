@@ -48,4 +48,9 @@ public class MainController {
 //
 //    }
 
+//    @GetMapping("/")
+//    public String getIndex(){
+//        return "redirect:/static/templates/index.html";
+//    }
+
 }

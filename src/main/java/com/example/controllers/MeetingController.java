@@ -39,9 +39,14 @@ public class MeetingController {
     @Autowired
     private MeetingRepository meetingRepository;
 
-    @GetMapping
-    public String get(){
-        return "meeting.html";
+//    @GetMapping
+//    public String get(){
+//        return "meeting.html";
+//    }
+    
+    @GetMapping("/:{id}")
+    public ResponseEntity<Meeting> getById(@PathVariable Long id){
+        return new ResponseEntity<>(meetingService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping("/all")
@@ -55,7 +60,6 @@ public class MeetingController {
             tmp = meetingRepository.filterMeeting(topic,dateFrom,dateTo,departmentId,employeeId);
             return new ResponseEntity<>(tmp.stream().map(this::convertToDto).collect(Collectors.toList()), HttpStatus.OK);
         }
-
         Collection<MeetingDto> result = meetingService.getAll().stream().map(this::convertToDto).collect(Collectors.toList());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -88,14 +92,14 @@ public class MeetingController {
 //
 //    }
 
-    @PostMapping("/save")
-    public String saveMeeting( Meeting meeting){
-        System.out.println(meeting.getTopic());
-        return "index";
-    }
+//    @PostMapping("/save")
+//    public String saveMeeting( Meeting meeting){
+//        System.out.println(meeting.getTopic());
+//        return "index";
+//    }
 
-    @GetMapping("/template")
-    public String getTemplate(){
-        return "meeting";
-    }
+//    @GetMapping("/template")
+//    public String getTemplate(){
+//        return "meeting";
+//    }
 }
