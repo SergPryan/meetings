@@ -1,6 +1,5 @@
 app = angular.module('meetingApp',['ngRoute'])
 
-
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider
         // .when('/meeting', {
@@ -14,10 +13,8 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'list_meetings.html',
             controller: 'appCtrl'
         })
-
         // .otherwise({redirectTo:'/items/computers'});
 }]);
-
 
 app.controller('appCtrl',function ($scope,$http,$filter) {
     $http.get('/employee/all').then(function (response) {
@@ -63,7 +60,7 @@ app.controller('appCtrl',function ($scope,$http,$filter) {
     }
 });
 
-app.controller('meetingCtrl',function ($scope, $routeParams, $http) {
+app.controller('meetingCtrl',function ($scope, $routeParams, $http,$filter) {
     $http.get('/meeting/'+$routeParams.id).then(function (response) {
         $scope.meeting = response.data
 
@@ -72,6 +69,17 @@ app.controller('meetingCtrl',function ($scope, $routeParams, $http) {
         $http.get('/employee/all' + '?departmentId=' + $scope.defaultDepartment).then(function (response) {
             $scope.employees = response.data
         })
+    }
+    $scope.deleteEmployee = function (index) {
+        $scope.meeting.listOfParticipants.splice(index,1)
+    }
+    $scope.fillAllEmployees = function () {
+        $http.get('/employee/all').then(function (response) {
+            $scope.allEmployees = response.data
+        })
+    }
+    $scope.addParticipant = function () {
+        $scope.meeting.listOfParticipants.push($scope.newParticipant)
     }
 
 })

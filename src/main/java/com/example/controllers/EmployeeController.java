@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,7 @@ public class EmployeeController {
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setId(employee.getId());
         employeeDto.setFullName(employee.getFullName());
+        employeeDto.setAge(LocalDate.now().getYear() - employee.getBirthday().getYear());
         if(employee.getDepartment() != null)
         {
             employeeDto.setDepartmentId(employee.getDepartment().getId());

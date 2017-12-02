@@ -4,6 +4,15 @@ public class EmployeeDto {
     private Long id;
     private String fullName;
     private Long departmentId;
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public Long getId() {
         return id;

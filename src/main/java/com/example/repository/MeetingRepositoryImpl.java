@@ -36,10 +36,11 @@ public class MeetingRepositoryImpl implements CustomizedMeetingRepository {
         }
         if(departmentId != null && !departmentId.equalsIgnoreCase("null")){
             arguments.add("department_id  = "+departmentId);
+            if(responsibleId != null && !responsibleId.equalsIgnoreCase("null")){
+                arguments.add("responsible_id  = "+responsibleId);
+            }
         }
-        if(responsibleId != null && !responsibleId.equalsIgnoreCase("null")){
-            arguments.add("responsible_id  = "+responsibleId);
-        }
+
         if(arguments.size() != 0){
             sb.append(" WHERE ");
             sb.append(String.join(" AND ",arguments));

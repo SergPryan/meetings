@@ -22,10 +22,27 @@
         <th>Подразделение</th>
         <th>Delete</th>
     </tr>
+    <tr ng-repeat="employee in meeting.listOfParticipants track by $index">
+        <td>{{employee.fullName}}</td>
+        <td>{{employee.birthday.year}}</td>
+        <td>{{employee.department.name}}</td>
+        <td>
+            <button ng-click="deleteEmployee($index)">Delete</button>
+        </td>
+
+    </tr>
 </table>
 
-<h3>Участник</h3><select></select>
-<button>Добавить</button> <br><br>
+<h3>Участник</h3><select ng-click="fillAllEmployees()" ng-model="newParticipant">
+    <option ng-repeat="employee in allEmployees" value="{{employee}}">{{employee.fullName}}
+    </option>
+
+</select>
+
+<button ng-click="addParticipant()">Добавить</button> <br><br>
+
+{{newParticipant}}<br>
+{{meeting.listOfParticipants }}
 
 <button>Сохранить</button>
 <button>Не сохранять</button>

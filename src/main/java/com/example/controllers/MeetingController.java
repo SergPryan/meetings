@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.dto.EmployeeDto;
 import com.example.dto.MeetingDto;
 import com.example.entity.Employee;
 import com.example.entity.Meeting;
@@ -68,10 +69,15 @@ public class MeetingController {
         MeetingDto meetingDto = new MeetingDto();
         meetingDto.setId(meeting.getId());
         meetingDto.setDate(meeting.getDateTime().format(DateTimeFormatter.ISO_DATE));
-        meetingDto.setDepartment(meeting.getResponsible().getDepartment().getName());
+        meetingDto.setDepartment(meeting.getDepartment());
         meetingDto.setTopic(meeting.getTopic());
         if(meeting.getResponsible() != null){
-            meetingDto.setResponsible(meeting.getResponsible().getFullName());
+            EmployeeDto employeeDto = new EmployeeDto();
+            employeeDto.setDepartmentId(meeting.getResponsible().getDepartment().getId());
+            employeeDto.setFullName(meeting.getResponsible().getFullName());
+            employeeDto.setId(meeting.getResponsible().getId());
+            employeeDto.setAge(LocalDate.now().getYear()- meeting.getResponsible().getBirthday().getYear());
+            meetingDto.setResponsible(employeeDto);
         }
         if(meeting.getListOfParticipants() != null)
         {

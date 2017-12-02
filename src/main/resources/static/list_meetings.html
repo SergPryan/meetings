@@ -26,8 +26,8 @@
 
         <td>{{meeting.date}}</td>
         <td><a href="#!/edit_meeting:{{meeting.id}}">{{meeting.topic}}</a></td>
-        <td>{{meeting.department}}</td>
-        <td>{{meeting.responsible}}</td>
+        <td>{{meeting.department.name}}</td>
+        <td>{{meeting.responsible.fullName}}</td>
         <td>{{meeting.numberOfParticipants}}</td>
     </tr>
 

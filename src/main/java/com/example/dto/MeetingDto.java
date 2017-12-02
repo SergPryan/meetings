@@ -1,12 +1,22 @@
 package com.example.dto;
 
+import com.example.entity.Department;
+
 public class MeetingDto {
     private Long id;
     private String date;
     private String topic;
-    private String department;
-    private String responsible;
+    private Department department;
+    private EmployeeDto responsible;
     private int numberOfParticipants;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     public Long getId() {
         return id;
@@ -24,19 +34,12 @@ public class MeetingDto {
         this.date = date;
     }
 
-    public String getDepartment() {
-        return department;
-    }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getResponsible() {
+    public EmployeeDto getResponsible() {
         return responsible;
     }
 
-    public void setResponsible(String responsible) {
+    public void setResponsible(EmployeeDto responsible) {
         this.responsible = responsible;
     }
 
